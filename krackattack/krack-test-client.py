@@ -1,4 +1,4 @@
-#!/usr/bin/env python2
+#!/usr/bin/env python3
 
 # Tests for key reinstallation vulnerabilities in Wi-Fi clients
 # Copyright (c) 2017, Mathy Vanhoef <Mathy.Vanhoef@cs.kuleuven.be>
@@ -575,8 +575,8 @@ def hostapd_read_config(config):
 
 if __name__ == "__main__":
 	if "--help" in sys.argv or "-h" in sys.argv:
-		print "\nSee README.md for usage instructions. Accepted parameters are"
-		print "\n\t" + "\n\t".join(["--replay-broadcast", "--group", "--tptk", "--tptk-rand", "--gtkinit", "--debug"]) + "\n"
+		print("\nSee README.md for usage instructions. Accepted parameters are")
+		print("\n\t" + "\n\t".join(["--replay-broadcast", "--group", "--tptk", "--tptk-rand", "--gtkinit", "--debug"]) + "\n")
 		quit(1)
 
 	options = TestOptions()
@@ -587,7 +587,7 @@ if __name__ == "__main__":
 	groupkey = argv_pop_argument("--group")
 	fourway = argv_pop_argument("--fourway")
 	if replay_broadcast + replay_unicast + fourway + groupkey > 1:
-		print "You can only select one argument of out replay-broadcast, replay-unicast, fourway, and group"
+		print("You can only select one argument of out replay-broadcast, replay-unicast, fourway, and group")
 		quit(1)
 	if replay_broadcast:
 		options.variant = TestOptions.ReplayBroadcast
@@ -602,7 +602,7 @@ if __name__ == "__main__":
 	tptk = argv_pop_argument("--tptk")
 	tptk_rand = argv_pop_argument("--tptk-rand")
 	if tptk + tptk_rand > 1:
-		print "You can only select one argument of out tptk and tptk-rand"
+		print("You can only select one argument of out tptk and tptk-rand")
 		quit(1)
 	if tptk:
 		options.tptk = TestOptions.TptkReplay

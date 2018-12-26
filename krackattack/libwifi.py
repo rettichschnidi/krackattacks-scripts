@@ -3,7 +3,7 @@
 # This code may be distributed under the terms of the BSD license.
 # See README for more details.
 from scapy.all import *
-from Cryptodome.Cipher import AES
+from Crypto.Cipher import AES
 from datetime import datetime
 
 #### Basic output and logging functionality ####
@@ -20,7 +20,7 @@ def log(level, msg, color=None, showtime=True):
 	if level == DEBUG   and color is None: color="gray"
 	if level == WARNING and color is None: color="orange"
 	if level == ERROR   and color is None: color="red"
-	print (datetime.now().strftime('[%H:%M:%S] ') if showtime else " "*11) + COLORCODES.get(color, "") + msg + "\033[1;0m"
+	print((datetime.now().strftime('[%H:%M:%S] ') if showtime else " "*11) + COLORCODES.get(color, "") + msg + "\033[1;0m")
 
 
 #### Packet Processing Functions ####
@@ -93,7 +93,7 @@ class MitmSocket(L2Socket):
 
 			# Remove FCS if present
 			if ord(rawframe[pos]) & 0x10 != 0:
-				return Dot11(str(p[Dot11])[:-4])
+				return Dot11(bytes(p[Dot11])[:-4])
 
 		return p[Dot11]
 

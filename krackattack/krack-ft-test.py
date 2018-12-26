@@ -1,4 +1,4 @@
-#!/usr/bin/env python2
+#!/usr/bin/env python3
 
 # Copyright (c) 2017, Mathy Vanhoef <Mathy.Vanhoef@cs.kuleuven.be>
 #
@@ -96,7 +96,10 @@ class KRAckAttackFt():
 		log(STATUS, "Note: disable Wi-Fi in your network manager so it doesn't interfere with this script")
 
 		# 0. Some users may forget this otherwise
-		subprocess.check_output(["rfkill", "unblock", "wifi"])
+		try:
+				subprocess.check_output(["rfkill", "unblock", "wifi"])
+		except Exception as e:
+				print("rfkill failed: %s" + str(e))
 
 		# 1. Remove unused virtual interfaces to start from a clean state
 		subprocess.call(["iw", self.nic_mon, "del"], stdout=subprocess.PIPE, stdin=subprocess.PIPE)
@@ -152,7 +155,7 @@ def argv_get_interface():
 
 if __name__ == "__main__":
 	if len(sys.argv) <= 1 or "--help" in sys.argv or "-h" in sys.argv:
-		print "See README.md for instructions on how to use this script"
+		print("See README.md for instructions on how to use this script")
 		quit(1)
 
 	# TODO: Verify that we only accept CCMP?
